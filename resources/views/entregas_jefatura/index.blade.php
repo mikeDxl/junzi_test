@@ -1,0 +1,148 @@
+@extends('layouts.app', ['activePage' => 'Entregables', 'menuParent' => 'forms', 'titlePage' => __('Entregas de Auditoría')])
+
+@section('content')
+    <div class="content">
+        <h2>Listado de Entregables</h2>
+
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <style>
+            /* Estilo para las Tabs */
+.nav-tabs .nav-link {
+    background-color: #495057!important;
+    border: 1px solid #dee2e6!important;
+    color: #dee2e6!important;
+    margin-right: 5px;
+    border-radius: 0.25rem;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: #007bff!important;
+    color: #fff!important;
+    border-color: #007bff!important;
+}
+
+.nav-tabs .nav-link:hover {
+    background-color: #007bff!important;
+    color: #007bff1!important;
+}
+
+.tab-content {
+    border: 1px solid #dee2e6!important;
+    border-top: none!important;
+    background-color: #ffffff!important;
+    padding: 20px;
+    border-radius: 0 0 0.25rem 0.25rem;
+}
+
+        </style>
+        <!-- Botón para crear nueva entrega -->
+        
+          <div class="row">
+            <div class="col-md-10">
+                <a href="{{ route('entregas_jefatura.create') }}" class="btn btn-info mb-3">Programar Entregable</a>
+            </div>
+            <div class="col-md-2">
+                @if(auth()->user()->perfil=="Jefatura")
+                <a class="btn btn-link" href="/config-entregas-jefatura"> <i class="fa fa-cog"></i> </a>
+                @endif
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <ul class="nav nav-tabs" id="entregasTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="pendientes-tab" data-bs-toggle="tab" data-bs-target="#pendientes" type="button" role="tab" aria-controls="pendientes" aria-selected="true">
+                    Pendientes
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="completadas-tab" data-bs-toggle="tab" data-bs-target="#completadas" type="button" role="tab" aria-controls="completadas" aria-selected="false">
+                    Completadas
+                </button>
+            </li>
+        </ul>
+
+        <div class="tab-content mt-3" id="entregasTabsContent">
+            <!-- Tab Pendientes -->
+            <div class="tab-pane fade show active" id="pendientes" role="tabpanel" aria-labelledby="pendientes-tab">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Reporte</th>
+                            <th>Responsable</th>
+                            <th>Fecha de Entrega</th>
+                            <th>Fecha Completada</th>
+                            <th>Días de Retraso</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($entregas_pendientes as $entrega)
+                            <tr>
+                                <td>{{ $entrega->configReporte->reporte ?? 'No especificado' }}</td>
+                                <td>{{ qcolab($entrega->responsable) }}</td>
+                                <td>{{ str_replace(' 00:00:00.000','',$entrega->fecha_de_entrega) }}</td>
+                                <td>{{ $entrega->fecha_completada }}</td>
+                                <td>
+                                    @php
+                                        $fechaEntrega = \Carbon\Carbon::parse($entrega->fecha_de_entrega);
+                                        $hoy = \Carbon\Carbon::now();
+                                        $diferencia = $hoy->diffInDays($fechaEntrega, false);
+                                    @endphp
+
+                                    @if ($diferencia >= 0)
+                                        {{ $diferencia }} días restantes
+                                    @else
+                                        {{ abs($diferencia) }} días de retraso
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Tab Completadas -->
+            <div class="tab-pane fade" id="completadas" role="tabpanel" aria-labelledby="completadas-tab">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Reporte</th>
+                            <th>Responsable</th>
+                            <th>Fecha de Entrega</th>
+                            <th>Fecha Completada</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($entregas_completadas as $entrega)
+                            <tr>
+                                <td>{{ $entrega->configReporte->reporte ?? 'No especificado' }}</td>
+                                <td>{{ qcolab($entrega->responsable) }}</td>
+                                <td>{{ str_replace(' 00:00:00.000','',$entrega->fecha_de_entrega) }}</td>
+                                <td>{{ $entrega->fecha_completada }}</td>
+                                <td>
+                                    <a href="/storage/app/public/archivos_adjuntos/{{ $entrega->archivo_adjunto }}" download>Descargar entregable</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+@endsection

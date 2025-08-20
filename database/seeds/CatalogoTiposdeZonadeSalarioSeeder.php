@@ -1,0 +1,193 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
+class CatalogoTiposdeZonadeSalarioSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+
+        DB::table('catalogo_de_tipos_de_zona_de_salario')->truncate();
+
+        DB::table('catalogo_de_tipos_de_zona_de_salario')->insert([
+            ['tipo' => 'A'],
+            ['tipo' => 'B'],
+            ['tipo' => 'C'],
+        ]);
+
+        DB::table('users')->truncate();
+
+        DB::table('users')->insert([
+
+            ['name' => 'Admin',
+             'email' => 'admin@junzi.com',
+             'password' => '$2y$10$M4Mzwsf4/j5z4y/Eu0P0luAFdHS6qCPN5yCDGkvKiCkRn8J.U16Lq',
+             'perfil' => 'Admin',
+             'rol' => NULL,
+             'colaborador_id' => NULL,
+             'device_key' => '0',
+             'picture' => '../white/img/jana.jpg',
+             'role_id' => '1',],
+        ]);
+
+
+        DB::table('conexiones')->truncate();
+
+        DB::table('conexiones')->insert([
+
+            ['company_id' => '0',
+             'name' => 'ct2008_SUPER_SERV',
+             'host' => '127.0.0.1\COMPAC',
+             'user' => 'sa',
+             'password' => 'Compac2010',
+             'database' => 'ct2008_SUPER_SERV',
+             'port' => '1433',
+             'driver' => 'sqlsrv',
+            ],
+            ['company_id' => '0',
+             'name' => 'ct2011_BAEZA_TRAN',
+             'host' => '127.0.0.1\COMPAC',
+             'user' => 'sa',
+             'password' => 'Compac2010',
+             'database' => 'ct2011_BAEZA_TRAN',
+             'port' => '1433',
+             'driver' => 'sqlsrv',
+            ],
+            ['company_id' => '0',
+             'name' => 'ct2011_CEL_BAEZA_',
+             'host' => '127.0.0.1\COMPAC',
+             'user' => 'sa',
+             'password' => 'Compac2010',
+             'database' => 'ct2011_CEL_BAEZA_',
+             'port' => '1433',
+             'driver' => 'sqlsrv',
+            ],
+            ['company_id' => '0',
+             'name' => 'ct2011_NUEVO_LARE',
+             'host' => '127.0.0.1\COMPAC',
+             'user' => 'sa',
+             'password' => 'Compac2010',
+             'database' => 'ct2011_NUEVO_LARE',
+             'port' => '1433',
+             'driver' => 'sqlsrv',
+            ],
+            ['company_id' => '0',
+             'name' => 'ct2011_QUIN_AUTOP',
+             'host' => '127.0.0.1\COMPAC',
+             'user' => 'sa',
+             'password' => 'Compac2010',
+             'database' => 'ct2011_QUIN_AUTOP',
+             'port' => '1433',
+             'driver' => 'sqlsrv',
+            ],
+            ['company_id' => '0',
+             'name' => 'ct2011_TALLER_AUT',
+             'host' => '127.0.0.1\COMPAC',
+             'user' => 'sa',
+             'password' => 'Compac2010',
+             'database' => 'ct2011_TALLER_AUT',
+             'port' => '1433',
+             'driver' => 'sqlsrv',
+            ],
+            ['company_id' => '0',
+             'name' => 'ct2012LUPEQSA_SADECV',
+             'host' => '127.0.0.1\COMPAC',
+             'user' => 'sa',
+             'password' => 'Compac2010',
+             'database' => 'ct2012LUPEQSA_SADECV',
+             'port' => '1433',
+             'driver' => 'sqlsrv',
+            ],
+            ['company_id' => '0',
+             'name' => 'ctAUTANQUES_DE_2019',
+             'host' => '127.0.0.1\COMPAC',
+             'user' => 'sa',
+             'password' => 'Compac2010',
+             'database' => 'ctAUTANQUES_DE_2019',
+             'port' => '1433',
+             'driver' => 'sqlsrv',
+            ],
+            ['company_id' => '0',
+             'name' => 'ctAUTOTANQUES_DE_QRO',
+             'host' => '127.0.0.1\COMPAC',
+             'user' => 'sa',
+             'password' => 'Compac2010',
+             'database' => 'ctAUTOTANQUES_DE_QRO',
+             'port' => '1433',
+             'driver' => 'sqlsrv',
+            ],
+            ['company_id' => '0',
+             'name' => 'ctCORPO_SERV_2019',
+             'host' => '127.0.0.1\COMPAC',
+             'user' => 'sa',
+             'password' => 'Compac2010',
+             'database' => 'ctCORPO_SERV_2019',
+             'port' => '1433',
+             'driver' => 'sqlsrv',
+            ],
+            ['company_id' => '0',
+             'name' => 'ctT_BAE_OP',
+             'host' => '127.0.0.1\COMPAC',
+             'user' => 'sa',
+             'password' => 'Compac2010',
+             'database' => 'ctT_BAE_OP',
+             'port' => '1433',
+             'driver' => 'sqlsrv',
+            ],
+            ['company_id' => '0',
+             'name' => 'ctTRANSCEN_MENSUA',
+             'host' => '127.0.0.1\COMPAC',
+             'user' => 'sa',
+             'password' => 'Compac2010',
+             'database' => 'ctTRANSCEN_MENSUA',
+             'port' => '1433',
+             'driver' => 'sqlsrv',
+            ],
+            ['company_id' => '0',
+             'name' => 'ctTRANSPORTES_LPQ',
+             'host' => '127.0.0.1\COMPAC',
+             'user' => 'sa',
+             'password' => 'Compac2010',
+             'database' => 'ctTRANSPORTES_LPQ',
+             'port' => '1433',
+             'driver' => 'sqlsrv',
+            ],
+            ['company_id' => '0',
+             'name' => 'ct2011_PROTECCION',
+             'host' => '127.0.0.1\COMPAC',
+             'user' => 'sa',
+             'password' => 'Compac2010',
+             'database' => 'ct2011_PROTECCION',
+             'port' => '1433',
+             'driver' => 'sqlsrv',
+            ],
+            ['company_id' => '0',
+             'name' => 'ctBAEZA_SA_DE_CV',
+             'host' => '127.0.0.1\COMPAC',
+             'user' => 'sa',
+             'password' => 'Compac2010',
+             'database' => 'ctBAEZA_SA_DE_CV',
+             'port' => '1433',
+             'driver' => 'sqlsrv',
+            ],
+            ['company_id' => '0',
+             'name' => 'ctCODICSA_2016',
+             'host' => '127.0.0.1\COMPAC',
+             'user' => 'sa',
+             'password' => 'Compac2010',
+             'database' => 'ctCODICSA_2016',
+             'port' => '1433',
+             'driver' => 'sqlsrv',
+            ],
+    ]);
+    }
+}

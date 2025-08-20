@@ -1,0 +1,102 @@
+@extends('layouts.app', ['activePage' => 'user-management', 'menuParent' => 'laravel', 'titlePage' => __('User Management')])
+
+@section('content')
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <form method="post" enctype="multipart/form-data" action="{{ route('user.update', $user) }}" autocomplete="off">
+            @csrf
+            @method('put')
+
+            <div class="card ">
+              <div class="card-header">
+                <h4 class="card-title">{{ __('Editar usuario') }}</h4>
+              </div>
+              <div class="card-body ">
+                <div class="row">
+                  <div class="col-md-12 text-left">
+                      <a href="{{ route('user.index') }}" class="btn btn-sm btn-link"> <i class="fa fa-arrow-left"></i> {{ __('Regresar') }}</a>
+                  </div>
+                </div>
+                <div class="row">
+                  <label class="col-sm-2 col-form-label">{{ __('Foto de perfil') }}</label>
+                  <div class="col-sm-7">
+                    <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                      <div class="fileinput-new thumbnail img-circle">
+                        @if ($user->picture)
+                          <img src="{{ $user->profilePicture() }}" alt="...">
+                        @else
+                          <img src="{{ asset('white') }}/img/placeholder.jpg" alt="...">
+                        @endif
+                      </div>
+                      <div class="fileinput-preview fileinput-exists thumbnail img-circle"></div>
+                      <div>
+                        <span class="btn btn-file">
+                          <span class="fileinput-new">{{ __('Select image') }}</span>
+                          <span class="fileinput-exists">{{ __('Change') }}</span>
+                          <input type="file" name="photo" id="input-picture" />
+                        </span>
+                          <a href="#pablo" class="btn btn-danger fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> {{ __('Remove') }}</a>
+                      </div>
+                      @include('alerts.feedback', ['field' => 'photo'])
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Campo Nombre -->
+                <div class="row">
+                  <label class="col-sm-2 col-form-label">{{ __('Nombre') }}</label>
+                  <div class="col-sm-7">
+                    <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
+                      <input class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" id="input-name" type="text" placeholder="{{ __('Name') }}" value="{{ old('name', $user->name) }}" required="true" aria-required="true"/>
+                      @include('alerts.feedback', ['field' => 'name'])
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Campo Email -->
+                <div class="row">
+                  <label class="col-sm-2 col-form-label">{{ __('Email') }}</label>
+                  <div class="col-sm-7">
+                    <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
+                    <input class="form-control" name="email" id="input-email" type="email"
+                    placeholder="Email" value="{{ old('email', $user->email) }}" required />
+                      @include('alerts.feedback', ['field' => 'email'])
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Eliminamos la contraseña para este caso -->
+                <!--
+                <div class="row">
+                  <label class="col-sm-2 col-form-label" for="input-password">{{ __(' Contraseña') }}</label>
+                  <div class="col-sm-7">
+                    <div class="form-group{{ $errors->has('password') ? ' has-danger' : '' }}">
+                      <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" input type="password" name="password" id="input-password" placeholder="{{ __('Password') }}" />
+                      @include('alerts.feedback', ['field' => 'password'])
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <label class="col-sm-2 col-form-label" for="input-password-confirmation">{{ __('Confirmar Contraseña') }}</label>
+                  <div class="col-sm-7">
+                    <div class="form-group">
+                      <input class="form-control" name="password_confirmation" id="input-password-confirmation" type="password" placeholder="{{ __('Confirm Password') }}" />
+                    </div>
+                  </div>
+                </div>
+                -->
+
+              </div>
+              <div class="card-footer ml-auto mr-auto">
+                <button type="submit" class="btn">{{ __('Guardar') }}</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+@endsection
